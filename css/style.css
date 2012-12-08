@@ -125,9 +125,6 @@ pre {
 }
 .follow-btn { width: 169px; margin: 0 auto; }
 
-#height-example,
-#width-example { overflow: hidden; }
-
 .example { margin-bottom: 1.5em; }
 
 .example div {
@@ -138,9 +135,7 @@ pre {
   padding: 10px;
 }
 
-#advanced-example div,
-#height-example div { width: 60px; }
-/* #width-example div { } */
+.sub { font-weight: bold; }
 
 #author {
   overflow: hidden;

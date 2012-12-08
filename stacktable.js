@@ -1,0 +1,70 @@
+/**
+ * stacktable.js
+ * Author & copyright (c) 2012: John Polacek
+ * Dual MIT & GPL license
+ *
+ * Page: http://johnpolacek.github.com/stacktable.js
+ * Repo: https://github.com/johnpolacek/stacktable.js/
+ *
+ * jQuery plugin for stacking tables on small screens
+ *
+ */
+;(function($) {
+
+  $.fn.stacktable = function(options) {
+    var $tables = this,
+        defaults = {id:'stacktable',hideOriginal:false},
+        settings = $.extend({}, defaults, options),
+        stacktable;
+
+    //if (!$.isFunction($.fn[stacktable])) { return false; }
+
+    return $tables.each(function() {
+      var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
+      if (settings.class) $stacktable.addClass(settings.class);
+      var markup = '';
+      $table = $(this);
+      $topRow = $table.find('tr').first();
+      $table.find('tr').each(function(index,value) {
+        markup += '<tr>'
+        // for the first row, top left table cell is the head of the table
+        if (index===0) {
+          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').first().html()+'</th></tr>';
+        }
+        // for the other rows, put the left table cell as the head for that row
+        // then iterate through the key/values
+        else {
+          $(this).find('td').each(function(index,value) {
+            if (index===0) {
+              markup += '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
+            } else {
+              if ($(this).html() !== ''){
+                markup += '<tr>'
+                markup += '<td class="st-key">'+$topRow.find('td,th').eq(index).html()+'</td>';
+                markup += '<td class="st-val">'+$(this).html()+'</td>';
+                markup += '</tr>';
+              }
+            }
+          });
+        }
+      });
+      $stacktable.append($(markup));
+      $table.before($stacktable);
+      if (settings.hideOriginal) $table.hide();
+      
+      // var $children = $(this).children(),
+      //     max = 0; // reset for each container
+
+      // $children.each(function() {
+      //   var $element = $(this),
+      //       value;
+      //   if (reset) { $element.css(type, ''); } // remove existing height/width dimension
+      //   value = $element[equalize]();          // call height(), outerHeight(), etc.
+      //   if (value > max) { max = value; }      // update max
+      // });
+
+      // $children.css(type, max +'px'); // add CSS to children
+    });
+  };
+
+}(jQuery));

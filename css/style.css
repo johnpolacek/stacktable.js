@@ -146,8 +146,14 @@ pre {
   display: inline-block;
   *display: block;
   zoom: 1;
-
   margin-top: 5px;
+}
+
+#resize-graphic {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: .6;
 }
 
 

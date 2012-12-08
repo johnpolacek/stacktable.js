@@ -17,8 +17,6 @@
         settings = $.extend({}, defaults, options),
         stacktable;
 
-    //if (!$.isFunction($.fn[stacktable])) { return false; }
-
     return $tables.each(function() {
       var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
       if (settings.class) $stacktable.addClass(settings.class);
@@ -51,19 +49,6 @@
       $stacktable.append($(markup));
       $table.before($stacktable);
       if (settings.hideOriginal) $table.hide();
-      
-      // var $children = $(this).children(),
-      //     max = 0; // reset for each container
-
-      // $children.each(function() {
-      //   var $element = $(this),
-      //       value;
-      //   if (reset) { $element.css(type, ''); } // remove existing height/width dimension
-      //   value = $element[equalize]();          // call height(), outerHeight(), etc.
-      //   if (value > max) { max = value; }      // update max
-      // });
-
-      // $children.css(type, max +'px'); // add CSS to children
     });
   };
 

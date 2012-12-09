@@ -123,6 +123,7 @@ pre {
   max-width: 800px;
   margin: 0 auto;
 }
+.logo { padding-right: 10px; margin-top: -5px; }
 .follow-btn { width: 169px; margin: 0 auto; }
 
 .example { margin-bottom: 1.5em; }

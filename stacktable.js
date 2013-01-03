@@ -19,12 +19,12 @@
 
     return $tables.each(function() {
       var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
-      if (settings.class) $stacktable.addClass(settings.class);
+      if (typeof settings.class !== undefined) $stacktable.addClass(settings.class);
       var markup = '';
       $table = $(this);
       $topRow = $table.find('tr').first();
       $table.find('tr').each(function(index,value) {
-        markup += '<tr>'
+        markup += '<tr>';
         // for the first row, top left table cell is the head of the table
         if (index===0) {
           markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').first().html()+'</th></tr>';
@@ -37,8 +37,12 @@
               markup += '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
             } else {
               if ($(this).html() !== ''){
-                markup += '<tr>'
-                markup += '<td class="st-key">'+$topRow.find('td,th').eq(index).html()+'</td>';
+                markup += '<tr>';
+                if ($topRow.find('td,th').eq(index).html()){
+                  markup += '<td class="st-key">'+$topRow.find('td,th').eq(index).html()+'</td>';
+                } else {
+                  markup += '<td class="st-key"></td>';
+                }
                 markup += '<td class="st-val">'+$(this).html()+'</td>';
                 markup += '</tr>';
               }

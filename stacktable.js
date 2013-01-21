@@ -19,7 +19,7 @@
 
     return $tables.each(function() {
       var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
-      if (typeof settings.class !== undefined) $stacktable.addClass(settings.class);
+      if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
       $table = $(this);
       $topRow = $table.find('tr').first();

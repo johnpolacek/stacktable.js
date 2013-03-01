@@ -22,12 +22,12 @@
       if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
       $table = $(this);
-      $topRow = $table.find('tr').first();
+      $topRow = $table.find('tr').eq(0);
       $table.find('tr').each(function(index,value) {
         markup += '<tr>';
         // for the first row, top left table cell is the head of the table
         if (index===0) {
-          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').first().html()+'</th></tr>';
+          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(0).html()+'</th></tr>';
         }
         // for the other rows, put the left table cell as the head for that row
         // then iterate through the key/values

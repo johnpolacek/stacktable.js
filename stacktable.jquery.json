@@ -7,7 +7,7 @@
         "table",
         "responsive"
     ],
-    "version": "1.0.0",
+    "version": "1.0.01",
     "author": {
         "name": "John Polacek",
         "url": "http://johnpolacek.com"
@@ -21,6 +21,6 @@
     "homepage": "http://johnpolacek.github.com/stacktable.js/",
     "demo": "http://johnpolacek.github.com/stacktable.js/",
     "dependencies": {
-        "jquery": ">=1.8.1"
+        "jquery": ">=1.9.1"
     }
 }

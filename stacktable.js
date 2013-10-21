@@ -14,8 +14,7 @@
   $.fn.stacktable = function(options) {
     var $tables = this,
         defaults = {id:'stacktable',hideOriginal:false},
-        settings = $.extend({}, defaults, options),
-        stacktable;
+        settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {
       var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');

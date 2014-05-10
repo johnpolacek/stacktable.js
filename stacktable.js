@@ -32,7 +32,7 @@
         // for the other rows, put the left table cell as the head for that row
         // then iterate through the key/values
         else {
-          $(this).find('td').each(function(index,value) {
+          $(this).find('td,th').each(function(index,value) {
             if (index===0) {
               markup += '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
             } else {

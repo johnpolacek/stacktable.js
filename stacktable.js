@@ -73,14 +73,34 @@
       if (typeof settings.myClass !== undefined) $stackcolumns.addClass(settings.myClass);
       $table.addClass('stacktable large-only');
       var tb = $('<tbody></tbody>');      
-      var col_i = 2;
+      var col_i = 1; //col index starts at 0 -> start copy at second column.
       
-      while (col_i<=num_cols){        
+      while (col_i<num_cols){        
         $table.find('tr').each(function(index,value) {
           var tem = $('<tr></tr>'); // todo opt. copy styles of $this; todo check if parent is thead or tfoot to handle accordingly
           if(index==0) tem.addClass("st-head-row st-head-row-main"); 
-          first = $(this).find('td,th').eq(0).clone().addClass("st-key"); // breaks original table style if any, so I don't add it on purpose, uncomment to add.
-          second = $(this).find('td,th').eq(col_i - 1).clone().addClass("st-val"); // idem
+          first = $(this).find('td,th').eq(0).clone().addClass("st-key");
+          var target = col_i;
+          // if colspan apply, recompute target for second cell.
+          if ($(this).find("*[colspan]").length) {
+            var i =0;
+            $(this).find('td,th').each(function(index,value) {            
+                var cs = $(this).attr("colspan");
+                if (cs) {
+                  cs = parseInt(cs, 10);
+                  target -= cs-1;
+                  if ((i+cs) > (col_i)) //out of current bounds
+                    target += i + cs - col_i -1; 
+                  i += cs;
+                }
+                else
+                  i++;
+
+                if (i > col_i) 
+                  return false; //target is set; break.
+            });
+          }
+          second = $(this).find('td,th').eq(target).clone().addClass("st-val").removeAttr("colspan");
           tem.append(first, second);
           tb.append(tem);
         });      

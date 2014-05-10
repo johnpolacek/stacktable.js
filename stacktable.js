@@ -13,7 +13,7 @@
 
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable',hideOriginal:false},
+        defaults = {id:'stacktable',hideOriginal:true},
         settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {
@@ -21,6 +21,7 @@
       if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
       $table = $(this);
+      $table.addClass('stacktable large-only');
       $topRow = $table.find('tr').eq(0);
       $table.find('tr').each(function(index,value) {
         markup += '<tr>';
@@ -51,7 +52,46 @@
       });
       $stacktable.append($(markup));
       $table.before($stacktable);
-      if (settings.hideOriginal) $table.hide();
+      if (!settings.hideOriginal) $table.show();
+    });
+  };
+
+
+
+ $.fn.stackcolumns = function(options) {
+    var $tables = this,
+        defaults = {id:'stacktable',hideOriginal:true},
+        settings = $.extend({}, defaults, options);
+
+    return $tables.each(function() {
+      $table = $(this);
+      var num_cols = $table.find('tr').eq(0).find('td,th').length; //first table <tr> must not contain colspans, or add sum(colspan-1) here.
+      if(num_cols<3) //stackcolumns has no effect on tables with less than 3 columns
+        return;
+
+      var $stackcolumns = $('<table class="'+settings.id+'"></table>');
+      if (typeof settings.myClass !== undefined) $stackcolumns.addClass(settings.myClass);
+      $table.addClass('stacktable large-only');
+      var tb = $('<tbody></tbody>');      
+      var col_i = 2;
+      
+      while (col_i<=num_cols){        
+        $table.find('tr').each(function(index,value) {
+          var tem = $('<tr></tr>'); // todo opt. copy styles of $this; todo check if parent is thead or tfoot to handle accordingly
+          if(index==0) tem.addClass("st-head-row st-head-row-main"); 
+          first = $(this).find('td,th').eq(0).clone().addClass("st-key"); // breaks original table style if any, so I don't add it on purpose, uncomment to add.
+          second = $(this).find('td,th').eq(col_i - 1).clone().addClass("st-val"); // idem
+          tem.append(first, second);
+          tb.append(tem);
+        });      
+        ++col_i;
+      }
+
+      $stackcolumns.append($(tb));
+      $table.before($stackcolumns);
+      if (!(settings.hideOriginal)) {
+        $table.show();
+      }
     });
   };
 

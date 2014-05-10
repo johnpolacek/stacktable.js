@@ -166,6 +166,71 @@
     </tbody>
   </table>
 
+  <h2>StakColumns</h2>
+  <p>An alternative responsive design creates a copy of the table into a 2 column key/value format that preserves the columns of the orginal table. We call is <em>stackcolumns</em> to contrast with the default <em>stacktables</em> that preserves the lines of the original table.</p>
+
+<style type="text/css">
+  th {text-align: left; padding-right: 1em}
+  th, td.sub {background-color: #eee}
+</style>
+
+ <table id="agenda-example">
+<!-- thead not supported by stacktable yet; neither is <th> in <tbody>; but the later is working in stackcolumns.
+  <thead>
+  <tr>
+     <th>Time</th>
+     <th>Day 1</th>
+     <th>Day 2</th>
+  </tr>
+ </thead> 
+ <tfoot>
+  <tr>
+     <td>night</td>
+     <td>rest</td>
+     <td>party</td>
+  </tr>
+ </tfoot> -->
+ <tbody>
+  <tr>
+     <th>Time</th>
+     <th>Day 1</th>
+     <th>Day 2</th>
+  </tr>
+  <tr>
+     <td>8 AM</td>
+     <td>breakfast</td>
+     <td> - </td>
+  </tr>
+  <tr>
+     <td>10 AM</td>
+     <td>work</td>
+     <td>breakfast</td>
+  </tr>
+  <tr>
+    <th>12AM</th>
+    <!--<td colspan="2" class="sub">lunch (as a single header)</td> not supported yet-->
+    <td class="sub">lunch</td>
+    <td class="sub">lunch</td>
+  </tr>
+  <tr>
+     <td>1 PM</td>
+     <!--<td  rowspan="2" style="text-align:center; background:#DDF">work <br/>& fun</td> <!-- not supported by tablestack yet -->
+     <td style="text-align:center; background:#DDF">work <br/>
+     <td>beach</td>
+  </tr>
+  <tr>
+     <td>4 PM</td>
+     <td style="text-align:center; background:#DDF">work <br/>
+     <td>beach</td>
+  </tr>
+  <tr>
+     <td>night</td>
+     <td>rest</td>
+     <td>party</td>
+  </tr>
+ </tbody>
+</table> 
+
   <img src="resize.png" id="resize-graphic" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
@@ -180,6 +245,7 @@
     $(this).replaceWith('<span>ran</span>');
   });
   $('#responsive-example-table').stacktable({myClass:'stacktable small-only'});
+  $('#agenda-example').stackcolumns({myClass:'stacktable small-only' });
 </script>
 
 <script type="text/javascript">

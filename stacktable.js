@@ -13,7 +13,7 @@
 
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable',hideOriginal:true},
+        defaults = {id:'stacktable small-only',hideOriginal:true},
         settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {
@@ -60,7 +60,7 @@
 
  $.fn.stackcolumns = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable',hideOriginal:true},
+        defaults = {id:'stacktable small-only',hideOriginal:true},
         settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {

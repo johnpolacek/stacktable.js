@@ -9,9 +9,9 @@
 /* RESPONSIVE EXAMPLE */
 
 .stacktable.large-only { display: table; }
-.small-only { display: none; }
+.stacktable.small-only { display: none; }
 
 @media (max-width: 800px) {
-  .large-only { display: none; }
+  .stacktable.large-only { display: none; }
   .stacktable.small-only { display: table; }
 }

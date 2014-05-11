@@ -16,7 +16,7 @@
     <h3>jQuery plugin for stacking tables on small screens</h3>
     <div id="author">
       <div class="follow-btn">
-        <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1347008535.html#_=1347293944835&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=johnpolacek&amp;show_count=false&amp;show_screen_name=true&amp;size=l" class="twitter-follow-button" style="width: 169px; height: 28px;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe> 
+        <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://platform.twitter.com/widgets/follow_button.1347008535.html#_=1347293944835&amp;id=twitter-widget-0&amp;lang=en&amp;screen_name=johnpolacek&amp;show_count=false&amp;show_screen_name=true&amp;size=l" class="twitter-follow-button" style="width: 169px; height: 28px;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe>
       </div>
       <p>Created by <a href="https://twitter.com/johnpolacek" target="_blank">John Polacek</a></p>
     </div>
@@ -30,7 +30,7 @@
   <p>Source files <a href="https://github.com/johnpolacek/stacktable.js/" target="_blank">on github</a> or <a href="https://github.com/johnpolacek/stacktable.js/zipball/master/" target="_blank">download the zip</a>.</p>
 
   <h2>How to Use</h2>
-  
+
   <p>Call the plugin on a table.</p>
 
   <h2>Simple Example <a id="run" href="#">run »</a></h2>
@@ -60,19 +60,19 @@
         <td>Something Else</td>
         <td>2.750%</td>
         <td>$345.23</td>
-        <td>5</td>
+        <th>5</th>
         <td>180</td>
         <td>Spaceship</td>
         <td>Skippy</td>
       </tr>
       <tr>
-        <td colspan="7" class="sub">Subgroup Header</td> 
+        <th colspan="7" class="sub">Subgroup Header</th>
       </tr>
       <tr>
         <td>Another Thing</td>
         <td>3.375%</td>
         <td>$563.12</td>
-        <td>222</td>
+        <th>222</th>
         <td>60</td>
         <td>Gym Shoe</td>
         <td>George</td>
@@ -102,7 +102,7 @@
 
   <p>Use media queries to toggle the visibility of the original table and the stacktable (check out the stacktable.css example). You can pass in classes or an id to give to the stacktable. Adjust the size of your browser window to see it in action in the example below.</p>
 
-  <pre>$('#responsive-example-table').stacktable({class:'your-class-name'});</pre>
+  <pre>$('#responsive-example-table').stacktable({myClass:'your-class-name'});</pre>
 
   <table id="responsive-example-table" class="large-only" cellspacing="0">
     <tbody>
@@ -134,7 +134,7 @@
         <td>Skippy</td>
       </tr>
       <tr>
-        <td colspan="7" class="sub">Subgroup Header</td> 
+        <td colspan="7" class="sub">Subgroup Header</td>
       </tr>
       <tr>
         <td>Another Thing</td>
@@ -166,6 +166,79 @@
     </tbody>
   </table>
 
+  <h2>StackColumns</h2>
+  <p>An alternative responsive design creates a copy of the table into a 2 column key/value format that preserves the columns of the orginal table. We call is <em>stackcolumns</em> to contrast with the default <em>stacktables</em> that preserves the lines of the original table.</p>
+
+<style type="text/css">
+  th {text-align: left; padding-right: 1em}
+  th, td.sub {background-color: #eee}
+</style>
+
+ <table id="agenda-example">
+<!-- thead not supported by stacktable yet; neither is <th> in <tbody>; but the later is working in stackcolumns.
+  <thead>
+  <tr>
+     <th>Time</th>
+     <th>Day 1</th>
+     <th>Day 2</th>
+  </tr>
+ </thead> 
+ <tfoot>
+  <tr>
+     <td>night</td>
+     <td>rest</td>
+     <td>party</td>
+  </tr>
+ </tfoot> -->
+ <tbody>
+  <tr>
+     <th>Time</th>
+     <th>Day 1</th>
+     <th>Day 2</th>
+     <th>Day 3</th>
+     <th>Day 4</th>
+  </tr>
+  <tr>
+     <td>8 AM</td>
+     <td style="text-align:center; background:#DFD" colspan="2">breakfast</td>
+     <td style="text-align:center; background:#FDD" colspan="2"> ------ </td>
+  </tr>
+  <tr>
+     <td>10 AM</td>
+     <td>work</td>
+     <td>work</td>
+     <td style="text-align:center; background:#DDF" colspan="2">breakfast</td>     
+  </tr>
+  <tr>
+    <th>12AM</th>
+    <td style="text-align:center; " colspan="3">lunch</td>
+    <td>run</td>
+  </tr>
+  <tr>
+     <td>1 PM</td>
+     <!--<td  rowspan="2" style="text-align:center; background:#DDF">work <br/>& read</td> <!-- not supported by tablestack yet -->
+     <td>work <br/>
+     <td>work <br/>
+     <td>beach</td>
+     <td class="sub">lunch</td>
+  </tr>
+  <tr>
+     <td>4 PM</td>
+     <td>work <br/>
+     <td>beach</td>
+     <td>beach</td>
+     <td>bike</td>
+  </tr>
+  <tr>
+     <td>night</td>
+     <td>rest</td>
+     <td>rest</td>
+     <td>party</td>
+     <td>rest</td>
+  </tr>
+ </tbody>
+</table> 
+
   <img src="resize.png" id="resize-graphic" />
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
@@ -180,6 +253,7 @@
     $(this).replaceWith('<span>ran</span>');
   });
   $('#responsive-example-table').stacktable({myClass:'stacktable small-only'});
+  $('#agenda-example').stackcolumns({myClass:'stacktable small-only' });
 </script>
 
 <script type="text/javascript">

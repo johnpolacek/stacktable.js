@@ -22,6 +22,7 @@
       var markup = '';
       $table = $(this);
       $table.addClass('stacktable large-only');
+      $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
       $table.find('tr').each(function(index,value) {
         markup += '<tr>';
@@ -50,6 +51,7 @@
           });
         }
       });
+      $stacktable.prepend($caption);
       $stacktable.append($(markup));
       $table.before($stacktable);
       if (!settings.hideOriginal) $table.show();

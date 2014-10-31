@@ -10,55 +10,69 @@
  *
  */
 ;(function($) {
-
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable small-only',hideOriginal:true},
+        defaults = {id:'stacktable small-only',hideOriginal:true,headIndex:0},
         settings = $.extend({}, defaults, options);
+
+    // checking the "headIndex" option presence... or defaults it to 0
+    if(options && options.headIndex)
+    	headIndex = options.headIndex;
+    else 
+    	headIndex = 0;
 
     return $tables.each(function() {
       var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
       if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
+
       $table = $(this);
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
-      $table.find('tr').each(function(index,value) {
-      
-        // for the first row, top left table cell is the head of the table
-        if (index===0) {
-          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(0).html()+'</th></tr>';
+
+      // using rowIndex and cellIndex in order to reduce ambiguity
+      $table.find('tr').each(function(rowIndex,value) {
+
+        // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
+      	headMarkup = '';
+      	bodyMarkup = '';
+
+        // for the first row, "headIndex" cell is the head of the table
+        if (rowIndex === 0) {
+          // the main heading goes into the markup variable
+          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(headIndex).html()+'</th></tr>';
         }
-        // for the other rows, put the left table cell as the head for that row
-        // then iterate through the key/values
         else {
-          $(this).find('td,th').each(function(index,value) {
-            if (index===0) {
-              markup += '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
+          // for the other rows, put the "headIndex" cell as the head for that row
+          // then iterate through the key/values
+          $(this).find('td,th').each(function(cellIndex,value) {
+            if (cellIndex === headIndex) {
+            	headMarkup = '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
             } else {
               if ($(this).html() !== ''){
-                markup += '<tr>';
-                if ($topRow.find('td,th').eq(index).html()){
-                  markup += '<td class="st-key">'+$topRow.find('td,th').eq(index).html()+'</td>';
+                bodyMarkup += '<tr>';
+                if ($topRow.find('td,th').eq(cellIndex).html()){
+                  bodyMarkup += '<td class="st-key">'+$topRow.find('td,th').eq(cellIndex).html()+'</td>';
                 } else {
-                  markup += '<td class="st-key"></td>';
+                  bodyMarkup += '<td class="st-key"></td>';
                 }
-                markup += '<td class="st-val">'+$(this).html()+'</td>';
-                markup += '</tr>';
+                bodyMarkup += '<td class="st-val">'+$(this).html()+'</td>';
+                bodyMarkup += '</tr>';
               }
             }
           });
+
+          markup += headMarkup + bodyMarkup;
         }
       });
+
       $stacktable.prepend($caption);
       $stacktable.append($(markup));
       $table.before($stacktable);
       if (!settings.hideOriginal) $table.show();
     });
   };
-
-
 
  $.fn.stackcolumns = function(options) {
     var $tables = this,

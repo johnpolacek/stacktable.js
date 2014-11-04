@@ -22,7 +22,8 @@
     	headIndex = 0;
 
     return $tables.each(function() {
-      var $stacktable = $('<table class="'+settings.id+'"><tbody></tbody></table>');
+      var table_css = $(this).prop('class') 
+      var $stacktable = $('<table class=" '+ table_css +' '+settings.id+'"><tbody></tbody></table>');
       if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
 
@@ -37,21 +38,21 @@
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
       	headMarkup = '';
       	bodyMarkup = '';
-
+        tr_class = $(this).prop('class');
         // for the first row, "headIndex" cell is the head of the table
         if (rowIndex === 0) {
           // the main heading goes into the markup variable
-          markup += '<tr><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(headIndex).html()+'</th></tr>';
+          markup += '<tr class=" '+tr_class +' "><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(headIndex).html()+'</th></tr>';
         }
         else {
           // for the other rows, put the "headIndex" cell as the head for that row
           // then iterate through the key/values
           $(this).find('td,th').each(function(cellIndex,value) {
             if (cellIndex === headIndex) {
-            	headMarkup = '<tr><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
+            	headMarkup = '<tr class="'+ tr_class+'"><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
             } else {
               if ($(this).html() !== ''){
-                bodyMarkup += '<tr>';
+                bodyMarkup += '<tr class="' + tr_class +'">';
                 if ($topRow.find('td,th').eq(cellIndex).html()){
                   bodyMarkup += '<td class="st-key">'+$topRow.find('td,th').eq(cellIndex).html()+'</td>';
                 } else {

@@ -57,7 +57,7 @@
                 } else {
                   bodyMarkup += '<td class="st-key"></td>';
                 }
-                bodyMarkup += '<td class="st-val">'+$(this).html()+'</td>';
+                bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
                 bodyMarkup += '</tr>';
               }
             }

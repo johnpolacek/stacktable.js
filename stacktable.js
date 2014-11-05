@@ -17,12 +17,12 @@
 
     // checking the "headIndex" option presence... or defaults it to 0
     if(options && options.headIndex)
-    	headIndex = options.headIndex;
-    else 
-    	headIndex = 0;
+      headIndex = options.headIndex;
+    else
+      headIndex = 0;
 
     return $tables.each(function() {
-      var table_css = $(this).prop('class') 
+      var table_css = $(this).prop('class');
       var $stacktable = $('<table class=" '+ table_css +' '+settings.id+'"><tbody></tbody></table>');
       if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
       var markup = '';
@@ -36,8 +36,8 @@
       $table.find('tr').each(function(rowIndex,value) {
 
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
-      	headMarkup = '';
-      	bodyMarkup = '';
+        headMarkup = '';
+        bodyMarkup = '';
         tr_class = $(this).prop('class');
         // for the first row, "headIndex" cell is the head of the table
         if (rowIndex === 0) {
@@ -49,7 +49,7 @@
           // then iterate through the key/values
           $(this).find('td,th').each(function(cellIndex,value) {
             if (cellIndex === headIndex) {
-            	headMarkup = '<tr class="'+ tr_class+'"><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
+              headMarkup = '<tr class="'+ tr_class+'"><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
             } else {
               if ($(this).html() !== ''){
                 bodyMarkup += '<tr class="' + tr_class +'">';
@@ -89,38 +89,38 @@
       var $stackcolumns = $('<table class="'+settings.id+'"></table>');
       if (typeof settings.myClass !== undefined) $stackcolumns.addClass(settings.myClass);
       $table.addClass('stacktable large-only');
-      var tb = $('<tbody></tbody>');      
+      var tb = $('<tbody></tbody>');
       var col_i = 1; //col index starts at 0 -> start copy at second column.
       
-      while (col_i<num_cols){        
+      while (col_i < num_cols) {
         $table.find('tr').each(function(index,value) {
           var tem = $('<tr></tr>'); // todo opt. copy styles of $this; todo check if parent is thead or tfoot to handle accordingly
-          if(index==0) tem.addClass("st-head-row st-head-row-main"); 
+          if(index === 0) tem.addClass("st-head-row st-head-row-main");
           first = $(this).find('td,th').eq(0).clone().addClass("st-key");
           var target = col_i;
           // if colspan apply, recompute target for second cell.
           if ($(this).find("*[colspan]").length) {
             var i =0;
-            $(this).find('td,th').each(function(index,value) {            
+            $(this).find('td,th').each(function(index,value) {
                 var cs = $(this).attr("colspan");
                 if (cs) {
                   cs = parseInt(cs, 10);
                   target -= cs-1;
                   if ((i+cs) > (col_i)) //out of current bounds
-                    target += i + cs - col_i -1; 
+                    target += i + cs - col_i -1;
                   i += cs;
                 }
                 else
                   i++;
 
-                if (i > col_i) 
+                if (i > col_i)
                   return false; //target is set; break.
             });
           }
           second = $(this).find('td,th').eq(target).clone().addClass("st-val").removeAttr("colspan");
           tem.append(first, second);
           tb.append(tem);
-        });      
+        });
         ++col_i;
       }
 

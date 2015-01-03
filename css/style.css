@@ -157,6 +157,9 @@ pre {
   opacity: .6;
 }
 
+.footer-ad { width:100%; text-align: center; margin-top: 3em; }
+.footer-ad img { width:100%; max-width: 728px; border: solid 1px #eee; }
+
 
 /* =============================================================================
    Non-Semantic Helper Classes

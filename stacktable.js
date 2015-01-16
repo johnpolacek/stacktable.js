@@ -1,6 +1,7 @@
 /**
  * stacktable.js
  * Author & copyright (c) 2012: John Polacek
+ * CardTable by: Justin McNally (2015)
  * Dual MIT & GPL license
  *
  * Page: http://johnpolacek.github.com/stacktable.js
@@ -10,6 +11,71 @@
  *
  */
 ;(function($) {
+  $.fn.cardtable = function(options) {
+    var $tables = this,
+        defaults = {id:'stacktable small-only',hideOriginal:true,headIndex:0},
+        settings = $.extend({}, defaults, options);
+
+    // checking the "headIndex" option presence... or defaults it to 0
+    if(options && options.headIndex)
+      headIndex = options.headIndex;
+    else
+      headIndex = 0;
+
+    return $tables.each(function() {
+      $table = $(this);
+      if ($table.hasClass('stacktable')) {
+        return;
+      }
+      var table_css = $(this).prop('class');
+      var $stacktable = $('<div></div>')
+      if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
+      var markup = '';
+
+      
+      $table.addClass('stacktable large-only');
+      $caption = $table.find("caption").clone();
+      $topRow = $table.find('tr').eq(0);
+
+      // using rowIndex and cellIndex in order to reduce ambiguity
+      $table.find('tbody tr').each(function(rowIndex,value) {
+
+        // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
+        headMarkup = '';
+        bodyMarkup = '';
+        tr_class = $(this).prop('class');
+        // for the first row, "headIndex" cell is the head of the table
+        // for the other rows, put the "headIndex" cell as the head for that row
+        // then iterate through the key/values
+        $(this).find('td,th').each(function(cellIndex,value) {
+          if ($(this).html() !== ''){
+            bodyMarkup += '<tr class="' + tr_class +'">';
+            if ($topRow.find('td,th').eq(cellIndex).html()){
+              bodyMarkup += '<td class="st-key">'+$table.find('thead th').eq(cellIndex).html()+'</td>';
+            } else {
+              bodyMarkup += '<td class="st-key"></td>';
+            }
+            bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
+            bodyMarkup += '</tr>';
+          }
+        });
+
+        markup += '<table class=" '+ table_css +' '+settings.id+'"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>'       
+      });
+
+      $table.find('tfoot tr td').each(function(rowIndex,value) {
+        if ($.trim($(value).text()) != "") {
+          markup += '<table class="  '+ table_css + ' ' +settings.id+'"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>'
+        }
+      });
+
+      $stacktable.prepend($caption);
+      $stacktable.append($(markup));
+      $table.before($stacktable);
+      if (!settings.hideOriginal) $table.show();
+    });
+  };
+
   $.fn.stacktable = function(options) {
     var $tables = this,
         defaults = {id:'stacktable small-only',hideOriginal:true,headIndex:0},

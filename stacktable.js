@@ -198,4 +198,10 @@
     });
   };
 
+  $(function ($) {
+    $('.cardtable').cardtable();
+    $('.stacktable').stacktable();
+    $('.stackcolumns').stackcolumns();
+  });
+
 }(jQuery));

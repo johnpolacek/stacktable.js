@@ -28,7 +28,7 @@
         return;
       }
       var table_css = $(this).prop('class');
-      var $stacktable = $('<div></div>')
+      var $stacktable = $('<div></div>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
 
@@ -60,12 +60,12 @@
           }
         });
 
-        markup += '<table class=" '+ table_css +' '+settings.id+'"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>'       
+        markup += '<table class=" '+ table_css +' '+settings.id+'"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>';
       });
 
       $table.find('tfoot tr td').each(function(rowIndex,value) {
-        if ($.trim($(value).text()) != "") {
-          markup += '<table class="  '+ table_css + ' ' +settings.id+'"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>'
+        if ($.trim($(value).text()) !== '') {
+          markup += '<table class="'+ table_css + ' ' +settings.id+'"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>';
         }
       });
 
@@ -89,7 +89,7 @@
 
     return $tables.each(function() {
       var table_css = $(this).prop('class');
-      var $stacktable = $('<table class=" '+ table_css +' '+settings.id+'"><tbody></tbody></table>');
+      var $stacktable = $('<table class="'+ table_css +' '+settings.id+'"><tbody></tbody></table>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
 

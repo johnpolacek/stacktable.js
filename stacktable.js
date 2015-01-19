@@ -29,7 +29,7 @@
       }
       var table_css = $(this).prop('class');
       var $stacktable = $('<div></div>')
-      if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
+      if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
 
       
@@ -90,7 +90,7 @@
     return $tables.each(function() {
       var table_css = $(this).prop('class');
       var $stacktable = $('<table class=" '+ table_css +' '+settings.id+'"><tbody></tbody></table>');
-      if (typeof settings.myClass !== undefined) $stacktable.addClass(settings.myClass);
+      if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
 
       $table = $(this);
@@ -153,7 +153,7 @@
         return;
 
       var $stackcolumns = $('<table class="'+settings.id+'"></table>');
-      if (typeof settings.myClass !== undefined) $stackcolumns.addClass(settings.myClass);
+      if (typeof settings.myClass !== 'undefined') $stackcolumns.addClass(settings.myClass);
       $table.addClass('stacktable large-only');
       var tb = $('<tbody></tbody>');
       var col_i = 1; //col index starts at 0 -> start copy at second column.

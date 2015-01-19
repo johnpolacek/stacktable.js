@@ -236,9 +236,9 @@
   };
 
   $(function ($) {
-    $('.cardtable').cardtable();
-    $('.stacktable').stacktable();
-    $('.stackcolumns').stackcolumns();
+    $('.cardtable-init').cardtable();
+    $('.stacktable-init').stacktable();
+    $('.stackcolumns-init').stackcolumns();
   });
 
 }(jQuery));

@@ -32,7 +32,7 @@
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
 
-      
+
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
@@ -51,7 +51,7 @@
           if ($(this).html() !== ''){
             bodyMarkup += '<tr class="' + tr_class +'">';
             if ($topRow.find('td,th').eq(cellIndex).html()){
-              bodyMarkup += '<td class="st-key">'+$table.find('thead th').eq(cellIndex).html()+'</td>';
+              bodyMarkup += '<td class="st-key">'+$topRow.find('td,th').eq(cellIndex).html()+'</td>';
             } else {
               bodyMarkup += '<td class="st-key"></td>';
             }
@@ -157,7 +157,7 @@
       $table.addClass('stacktable large-only');
       var tb = $('<tbody></tbody>');
       var col_i = 1; //col index starts at 0 -> start copy at second column.
-      
+
       while (col_i < num_cols) {
         $table.find('tr').each(function(index,value) {
           var tem = $('<tr></tr>'); // todo opt. copy styles of $this; todo check if parent is thead or tfoot to handle accordingly

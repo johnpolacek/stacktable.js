@@ -1,0 +1,32 @@
+{
+  "name": "stacktable.js",
+  "title": "stacktable.js",
+  "version": "1.0.0",
+  "description": "jQuery plugin for stacking tables on small screens",
+  "main": "stacktable.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnpolacek/stacktable.js.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "jquery",
+    "tables"
+  ],
+  "devDependencies": {
+    "onchange": "latest"
+  },
+  "author": {
+    "name": "John Polacek",
+    "url": "http://www.johnpolacek.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/johnpolacek/stacktable.js/issues"
+  },
+  "homepage": "http://johnpolacek.github.com/stacktable.js/",
+  "files": [
+    "stacktable.js"
+  ]
+}

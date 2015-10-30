@@ -8,6 +8,7 @@
  * Repo: https://github.com/johnpolacek/stacktable.js/
  *
  * jQuery plugin for stacking tables on small screens
+ * Requires jQuery version 1.7 or above
  *
  */
 ;(function($) {

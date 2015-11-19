@@ -327,7 +327,7 @@
 <script>
   $(document).on('click', '#run', function(e) {
     e.preventDefault();
-    $('#simple-example-table').stacktable({hideOriginal:true});
+    $('#simple-example-table').stacktable();
     $(this).replaceWith('<span>ran</span>');
   });
   $('#responsive-example-table').stacktable({myClass:'your-custom-class'});

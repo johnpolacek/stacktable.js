@@ -14,7 +14,7 @@
 ;(function($) {
   $.fn.cardtable = function(options) {
     var $tables = this,
-        defaults = {hideOriginal:true,headIndex:0},
+        defaults = {headIndex:0},
         settings = $.extend({}, defaults, options),
         headIndex;
 
@@ -74,13 +74,12 @@
       $stacktable.prepend($caption);
       $stacktable.append($(markup));
       $table.before($stacktable);
-      if (!settings.hideOriginal) $table.show();
     });
   };
 
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {hideOriginal:true,headIndex:0},
+        defaults = {headIndex:0},
         settings = $.extend({}, defaults, options),
         headIndex;
 
@@ -141,13 +140,12 @@
       $stacktable.prepend($caption);
       $stacktable.append($(markup));
       $table.before($stacktable);
-      if (!settings.hideOriginal) $table.show();
     });
   };
 
  $.fn.stackcolumns = function(options) {
     var $tables = this,
-        defaults = {hideOriginal:true},
+        defaults = {},
         settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {
@@ -196,9 +194,6 @@
 
       $stackcolumns.append($(tb));
       $table.before($stackcolumns);
-      if (!(settings.hideOriginal)) {
-        $table.show();
-      }
     });
   };
 

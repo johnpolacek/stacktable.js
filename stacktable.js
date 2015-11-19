@@ -14,7 +14,7 @@
 ;(function($) {
   $.fn.cardtable = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable small-only',hideOriginal:true,headIndex:0},
+        defaults = {hideOriginal:true,headIndex:0},
         settings = $.extend({}, defaults, options),
         headIndex;
 
@@ -34,7 +34,6 @@
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
       var $caption, $topRow, headMarkup, bodyMarkup, tr_class;
-
 
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
@@ -63,12 +62,12 @@
           }
         });
 
-        markup += '<table class=" '+ table_css +' '+settings.id+'"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>';
+        markup += '<table class=" '+ table_css +' stacktable small-only"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>';
       });
 
       $table.find('tfoot tr td').each(function(rowIndex,value) {
         if ($.trim($(value).text()) !== '') {
-          markup += '<table class="'+ table_css + ' ' +settings.id+'"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>';
+          markup += '<table class="'+ table_css + ' stacktable small-only"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>';
         }
       });
 
@@ -81,7 +80,7 @@
 
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable small-only',hideOriginal:true,headIndex:0},
+        defaults = {hideOriginal:true,headIndex:0},
         settings = $.extend({}, defaults, options),
         headIndex;
 
@@ -93,7 +92,7 @@
 
     return $tables.each(function() {
       var table_css = $(this).prop('class');
-      var $stacktable = $('<table class="'+ table_css +' '+settings.id+'"><tbody></tbody></table>');
+      var $stacktable = $('<table class="'+ table_css +' stacktable small-only"><tbody></tbody></table>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
       var $table, $caption, $topRow, headMarkup, bodyMarkup, tr_class;
@@ -148,7 +147,7 @@
 
  $.fn.stackcolumns = function(options) {
     var $tables = this,
-        defaults = {id:'stacktable small-only',hideOriginal:true},
+        defaults = {hideOriginal:true},
         settings = $.extend({}, defaults, options);
 
     return $tables.each(function() {
@@ -157,7 +156,7 @@
       if(num_cols<3) //stackcolumns has no effect on tables with less than 3 columns
         return;
 
-      var $stackcolumns = $('<table class="'+settings.id+'"></table>');
+      var $stackcolumns = $('<table class="stacktable small-only"></table>');
       if (typeof settings.myClass !== 'undefined') $stackcolumns.addClass(settings.myClass);
       $table.addClass('stacktable large-only');
       var tb = $('<tbody></tbody>');

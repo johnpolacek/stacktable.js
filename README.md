@@ -4,6 +4,11 @@ The Responsive Tables jQuery plugin for stacking tables on small screens. The pu
 
 [Follow me on Twitter](http://twitter.com/johnpolacek)
 
+## Options
+**myClass:** Space separated classes to add to the table.
+
+**headIndex:** Use this to specify the row index of the header, in case it isn’t the first.
+
 
 # Legal
 

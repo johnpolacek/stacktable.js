@@ -38,6 +38,12 @@
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
+      
+      var siblings = $table.siblings();
+      console.log(siblings)
+      if (siblings.hasClass('small-only')) {
+        siblings.remove();
+      }
 
       // using rowIndex and cellIndex in order to reduce ambiguity
       $table.find('tbody tr').each(function() {

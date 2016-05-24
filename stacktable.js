@@ -40,7 +40,6 @@
       $topRow = $table.find('tr').eq(0);
       
       var siblings = $table.siblings();
-      console.log(siblings)
       if (siblings.hasClass('small-only')) {
         siblings.remove();
       }

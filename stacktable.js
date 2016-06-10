@@ -130,7 +130,7 @@
                                 var dataSet = $(this).data();
                                 var dataString = '';
                                 for (var data in dataSet) {
-                                    dataString += 'data-'+data+"="+dataSet[data]+" ";
+                                    dataString += 'data-'+data+'="'+dataSet[data]+'"';
                                 }
                                 bodyMarkup += '<td class="st-val ' + $(this).prop('class') + '" '+dataString+'>' + $(this).html() + '</td>';
                                 bodyMarkup += '</tr>';

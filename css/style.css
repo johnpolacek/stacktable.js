@@ -63,6 +63,7 @@ h1 {
   font-size: 4em;
 }
 
+h2 {margin-top:2em;}
 h2 a,
 h2 span { font-size: .8em; }
 
@@ -138,9 +139,8 @@ input[readonly] {
   opacity: .6;
 }
 
-.footer-ad { width:100%; text-align: center; margin-top: 3em; }
+.footer-ad { width:100%; text-align: center; margin: 4em 0; }
 .footer-ad img { width:100%; max-width: 728px; border: solid 1px #eee; }
-
 
 /* Helpers */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }

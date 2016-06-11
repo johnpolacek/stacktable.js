@@ -39,10 +39,8 @@
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
       
-      var siblings = $table.siblings();
-      if (siblings.hasClass('small-only')) {
-        siblings.remove();
-      }
+      // avoid duplication when paginating
+      $table.siblings().filter('.small-only').remove();
 
       // using rowIndex and cellIndex in order to reduce ambiguity
       $table.find('tbody tr').each(function() {

@@ -38,7 +38,7 @@
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
-      
+
       // avoid duplication when paginating
       $table.siblings().filter('.small-only').remove();
 
@@ -82,7 +82,7 @@
 
   $.fn.stacktable = function(options) {
     var $tables = this,
-        defaults = {headIndex:0},
+        defaults = {headIndex:0,displayHeader:true},
         settings = $.extend({}, defaults, options),
         headIndex;
 
@@ -97,12 +97,14 @@
       var $stacktable = $('<table class="'+ table_css +' stacktable small-only"><tbody></tbody></table>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
-      var $table, $caption, $topRow, headMarkup, bodyMarkup, tr_class;
+      var $table, $caption, $topRow, headMarkup, bodyMarkup, tr_class, displayHeader;
 
       $table = $(this);
       $table.addClass('stacktable large-only');
       $caption = $table.find("caption").clone();
       $topRow = $table.find('tr').eq(0);
+
+      displayHeader = $table.data('display-header') === undefined ? settings.displayHeader : $table.data('display-header')
 
       // using rowIndex and cellIndex in order to reduce ambiguity
       $table.find('tr').each(function(rowIndex) {
@@ -114,7 +116,9 @@
         // for the first row, "headIndex" cell is the head of the table
         if (rowIndex === 0) {
           // the main heading goes into the markup variable
-          markup += '<tr class=" '+tr_class +' "><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(headIndex).html()+'</th></tr>';
+          if (displayHeader) {
+            markup += '<tr class=" '+tr_class +' "><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('th,td').eq(headIndex).html()+'</th></tr>';
+          }
         }
         else {
           // for the other rows, put the "headIndex" cell as the head for that row

@@ -9,6 +9,7 @@ The Responsive Tables jQuery plugin for stacking tables on small screens. The pu
 
 **headIndex:** Use this to specify the row index of the header, in case it isn’t the first.
 
+**multiTable:** [For `.stackcolumns()` only] - Boolean that defaults to false. Use this to split the final output into multiple tables.
 
 # Legal
 

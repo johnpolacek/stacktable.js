@@ -148,8 +148,17 @@
 
  $.fn.stackcolumns = function(options) {
     var $tables = this,
-        defaults = {},
-        settings = $.extend({}, defaults, options);
+        defaults = {multiTable:false},
+        settings = $.extend({}, defaults, options),
+        multiTable;
+
+    // checking the "multiTable" option presence... or defaults it to false
+    if(typeof options.multiTable !== 'undefined') {
+      multiTable = options.multiTable;
+    }
+    else {
+      multiTable = false;
+    }
 
     return $tables.each(function() {
       var $table = $(this);
@@ -195,8 +204,25 @@
         ++col_i;
       }
 
-      $stackcolumns.append($(tb));
-      $table.before($stackcolumns);
+      if (multiTable) {
+        var tempTable,
+            tempRows,
+            numTables = tb.find('.st-head-row-main').length;
+        for(var i = 0; i < numTables; i++) {
+          tempTable = $stackcolumns.clone();
+          if(i < numTables - 1) {
+            tempRows = tb.find('.st-head-row-main').eq(i).nextUntil('.st-head-row-main').addBack();
+          } else {
+            tempRows = tb.find('.st-head-row-main').eq(i).nextAll().addBack();
+          }
+          tempTable.append(tempRows.clone());
+          tempTable.addClass('stacktable-' + i).children().wrapAll('<tbody></tbody>');
+          $table.before(tempTable);
+        }
+      } else {
+        $stackcolumns.append($(tb));
+        $table.before($stackcolumns);
+      }
     });
   };
 

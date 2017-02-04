@@ -105,7 +105,7 @@
       $caption = $table.find(">caption").clone();
       $topRow = $table.find('>thead>tr,>tbody>tr,>tfoot>tr').eq(0);
 
-      displayHeader = $table.data('display-header') === undefined ? settings.displayHeader : $table.data('display-header')
+      displayHeader = $table.data('display-header') === undefined ? settings.displayHeader : $table.data('display-header');
 
       // using rowIndex and cellIndex in order to reduce ambiguity
       $table.find('>tbody>tr').each(function(rowIndex) {
@@ -185,9 +185,9 @@
                   if ((i+cs) > (col_i)) //out of current bounds
                     target += i + cs - col_i -1;
                   i += cs;
-                }
-                else
+                } else {
                   i++;
+                }
 
                 if (i > col_i)
                   return false; //target is set; break.

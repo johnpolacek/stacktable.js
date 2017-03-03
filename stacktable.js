@@ -114,7 +114,7 @@
         headMarkup = '';
         bodyMarkup = '';
         tr_class = $(this).prop('class');
-        
+
         // for the first row, "headIndex" cell is the head of the table
         if (rowIndex === 0) {
           // the main heading goes into the markup variable
@@ -158,6 +158,7 @@
 
     return $tables.each(function() {
       var $table = $(this);
+      var $caption = $table.find(">caption").clone();
       var num_cols = $table.find('>thead>tr,>tbody>tr,>tfoot>tr').eq(0).find('>td,>th').length; //first table <tr> must not contain colspans, or add sum(colspan-1) here.
       if(num_cols<3) //stackcolumns has no effect on tables with less than 3 columns
         return;
@@ -201,6 +202,7 @@
       }
 
       $stackcolumns.append($(tb));
+      $stackcolumns.prepend($caption);
       $table.before($stackcolumns);
     });
   };

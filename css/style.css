@@ -6,7 +6,7 @@ audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 
 html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 html, button, input, select, textarea { font-family: sans-serif; color: #222; }
-body { margin: 0; font-size: 1em; line-height: 1.4; }
+body { margin: 0; font-size: 18px; line-height: 1.4; }
 
 ::-moz-selection { background: #20A6DB; color: #fff; text-shadow: none; }
 ::selection { background: #20A6DB; color: #fff; text-shadow: none; }
@@ -87,6 +87,15 @@ pre {
           border-radius: 10px;
 }
 
+th {text-align: left; padding-right: 1em}
+th, td.sub {background-color: #eee}
+td {padding:.5em;}
+.table {
+  border: 1px solid black;
+}
+.table .st-key {
+  font-weight: bold;
+}
 
 #wrapper {
   overflow: hidden;

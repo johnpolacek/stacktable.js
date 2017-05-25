@@ -7,6 +7,7 @@
   <link href="css/style.css" rel="stylesheet" />
   <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
   <link href="stacktable.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <div id="wrapper">
@@ -178,154 +179,144 @@
   <p>Card table works similarly to stack table except it breaks each row into its own table. The row tables function like cards. Any content left in tfoot is also broken into its own card, this allows for things like view all links or pagination to be easily used.</p>
 
 
- <table id="card-table" class="table">
-  <thead>
-  <tr>
-     <th width="30%">Name</th>
-     <th width="30%">Phone</th>
-     <th width="30%">Info</th>
-     <th width="10%">Actions</th>
-  </tr>
- </thead> 
- <tbody>
-  <tr>
-    <td>
-      Test
+  <table id="card-table" class="table">
+    <thead>
+    <tr>
+       <th width="30%">Name</th>
+       <th width="30%">Phone</th>
+       <th width="30%">Info</th>
+       <th width="10%">Actions</th>
+    </tr>
+   </thead> 
+   <tbody>
+    <tr>
+      <td>
+        Test
+      </td>
+      <td>
+        555-555-5555
+      </td>
+      <td>
+        I am a test
+      </td>
+      <td>
+        <a href="#">Edit</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Greg
+      </td>
+      <td>
+        555-555-5555
+      </td>
+      <td>
+        This is an example
+      </td>
+      <td>
+        <a href="#">Edit</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        John
+      </td>
+      <td>
+        444-444-4444
+      </td>
+      <td>
+        Tables are cool
+      </td>
+      <td>
+        <a href="#">Edit</a>
+      </td>
+    </tr>
+   </tbody>
+   <tfoot>
+    <tr>
+    <td colspan="4">
+      <a href="#">View all</a>
     </td>
-    <td>
-      555-555-5555
-    </td>
-    <td>
-      I am a test
-    </td>
-    <td>
-      <a href="#">Edit</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      Greg
-    </td>
-    <td>
-      555-555-5555
-    </td>
-    <td>
-      This is an example
-    </td>
-    <td>
-      <a href="#">Edit</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      John
-    </td>
-    <td>
-      444-444-4444
-    </td>
-    <td>
-      Tables are cool
-    </td>
-    <td>
-      <a href="#">Edit</a>
-    </td>
-  </tr>
- </tbody>
- <tfoot>
-  <tr>
-  <td colspan="4">
-    <a href="#">View all</a>
-  </td>
-  </tr>
- </tfoot>
+    </tr>
+   </tfoot>
 
-</table> 
+  </table> 
 
 
   <h2>StackColumns</h2>
   <p>An alternative responsive design creates a copy of the table into a 2 column key/value format that preserves the columns of the original table. We call it <em>stackcolumns</em> to contrast with the default <em>stacktables</em> that preserves the lines of the original table.</p>
 
-<style type="text/css">
-  th {text-align: left; padding-right: 1em}
-  th, td.sub {background-color: #eee}
-  .table {
-    border: 1px solid black;
-  }
-  .table .st-key {
-    font-weight: bold;
-  }
-</style>
+  <table id="agenda-example">
+  <!-- thead not supported by stacktable yet; neither is <th> in <tbody>; but the later is working in stackcolumns.
+    <thead>
+    <tr>
+       <th>Time</th>
+       <th>Day 1</th>
+       <th>Day 2</th>
+    </tr>
+   </thead> 
+   <tfoot>
+    <tr>
+       <td>night</td>
+       <td>rest</td>
+       <td>party</td>
+    </tr>
+   </tfoot> -->
+   <tbody>
+    <tr>
+       <th>Time</th>
+       <th>Day 1</th>
+       <th>Day 2</th>
+       <th>Day 3</th>
+       <th>Day 4</th>
+    </tr>
+    <tr>
+       <td>8 AM</td>
+       <td style="text-align:center; background:#DFD" colspan="2">breakfast</td>
+       <td style="text-align:center; background:#FDD" colspan="2"> ------ </td>
+    </tr>
+    <tr>
+       <td>10 AM</td>
+       <td>work</td>
+       <td>work</td>
+       <td style="text-align:center; background:#DDF" colspan="2">breakfast</td>     
+    </tr>
+    <tr>
+      <th>12AM</th>
+      <td style="text-align:center; " colspan="3">lunch</td>
+      <td>run</td>
+    </tr>
+    <tr>
+       <td>1 PM</td>
+       <!--<td  rowspan="2" style="text-align:center; background:#DDF">work <br/>& read</td> <!-- not supported by tablestack yet -->
+       <td>work <br/>
+       <td>work <br/>
+       <td>beach</td>
+       <td class="sub">lunch</td>
+    </tr>
+    <tr>
+       <td>4 PM</td>
+       <td>work <br/>
+       <td>beach</td>
+       <td>beach</td>
+       <td>bike</td>
+    </tr>
+    <tr>
+       <td>night</td>
+       <td>rest</td>
+       <td>rest</td>
+       <td>party</td>
+       <td>rest</td>
+    </tr>
+   </tbody>
+  </table> 
 
- <table id="agenda-example">
-<!-- thead not supported by stacktable yet; neither is <th> in <tbody>; but the later is working in stackcolumns.
-  <thead>
-  <tr>
-     <th>Time</th>
-     <th>Day 1</th>
-     <th>Day 2</th>
-  </tr>
- </thead> 
- <tfoot>
-  <tr>
-     <td>night</td>
-     <td>rest</td>
-     <td>party</td>
-  </tr>
- </tfoot> -->
- <tbody>
-  <tr>
-     <th>Time</th>
-     <th>Day 1</th>
-     <th>Day 2</th>
-     <th>Day 3</th>
-     <th>Day 4</th>
-  </tr>
-  <tr>
-     <td>8 AM</td>
-     <td style="text-align:center; background:#DFD" colspan="2">breakfast</td>
-     <td style="text-align:center; background:#FDD" colspan="2"> ------ </td>
-  </tr>
-  <tr>
-     <td>10 AM</td>
-     <td>work</td>
-     <td>work</td>
-     <td style="text-align:center; background:#DDF" colspan="2">breakfast</td>     
-  </tr>
-  <tr>
-    <th>12AM</th>
-    <td style="text-align:center; " colspan="3">lunch</td>
-    <td>run</td>
-  </tr>
-  <tr>
-     <td>1 PM</td>
-     <!--<td  rowspan="2" style="text-align:center; background:#DDF">work <br/>& read</td> <!-- not supported by tablestack yet -->
-     <td>work <br/>
-     <td>work <br/>
-     <td>beach</td>
-     <td class="sub">lunch</td>
-  </tr>
-  <tr>
-     <td>4 PM</td>
-     <td>work <br/>
-     <td>beach</td>
-     <td>beach</td>
-     <td>bike</td>
-  </tr>
-  <tr>
-     <td>night</td>
-     <td>rest</td>
-     <td>rest</td>
-     <td>party</td>
-     <td>rest</td>
-  </tr>
- </tbody>
-</table> 
-
-<div class="footer-ad">
-  <a target="_blank" href="http://shareasale.com/r.cfm?b=492491&amp;u=471107&amp;m=45652&amp;urllink=&amp;afftrack="><img src="http://static.shareasale.com/image/45652/728.90.jpg" border="0" alt="Sell your Macbook for cash with gazelle" /></a>
-</div>
+  <div class="footer-ad">
+    <a target="_blank" href="http://shareasale.com/r.cfm?b=492491&amp;u=471107&amp;m=45652&amp;urllink=&amp;afftrack="><img src="http://static.shareasale.com/image/45652/728.90.jpg" border="0" alt="Sell your Macbook for cash with gazelle" /></a>
+  </div>
 
   <img src="resize.png" id="resize-graphic" />
+</div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js"><\/script>')</script> </script>

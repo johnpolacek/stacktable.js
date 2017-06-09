@@ -108,7 +108,7 @@
       displayHeader = $table.data('display-header') === undefined ? settings.displayHeader : $table.data('display-header');
 
       // using rowIndex and cellIndex in order to reduce ambiguity
-      $table.find('>tbody>tr').each(function(rowIndex) {
+      $table.find('>tbody>tr, >thead>tr').each(function(rowIndex) {
 
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
         headMarkup = '';

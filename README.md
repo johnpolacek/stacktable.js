@@ -14,4 +14,4 @@ The Responsive Tables jQuery plugin for stacking tables on small screens. The pu
 
 Author & copyright (c) 2012: [John Polacek](http://johnpolacek.com)
 
-Dual MIT & GPL license
+MIT License

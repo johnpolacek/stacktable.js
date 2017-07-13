@@ -178,6 +178,7 @@
   <h2>Card Table</h2>
   <p>Card table works similarly to stack table except it breaks each row into its own table. The row tables function like cards. Any content left in tfoot is also broken into its own card, this allows for things like view all links or pagination to be easily used.</p>
 
+  <pre>$('#responsive-card-table-example').cardtable();</pre>
 
   <table id="card-table" class="table">
     <thead>
@@ -245,6 +246,8 @@
 
   <h2>StackColumns</h2>
   <p>An alternative responsive design creates a copy of the table into a 2 column key/value format that preserves the columns of the original table. We call it <em>stackcolumns</em> to contrast with the default <em>stacktables</em> that preserves the lines of the original table.</p>
+
+  <pre>$('#responsive-stackcolumns-example').stackcolumns();</pre>
 
   <table id="agenda-example">
   <!-- thead not supported by stacktable yet; neither is <th> in <tbody>; but the later is working in stackcolumns.

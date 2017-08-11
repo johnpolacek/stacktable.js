@@ -1,7 +1,7 @@
 {
   "name": "stacktable.js",
   "main": "stacktable.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "http://johnpolacek.github.com/stacktable.js/",
   "description": "jQuery plugin for stacking tables on small screens",
   "keywords": [

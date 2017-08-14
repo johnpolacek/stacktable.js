@@ -2,7 +2,7 @@
  * stacktable.js
  * Author & copyright (c) 2012: John Polacek
  * CardTable by: Justin McNally (2015)
- * Dual MIT & GPL license
+ * MIT license
  *
  * Page: http://johnpolacek.github.com/stacktable.js
  * Repo: https://github.com/johnpolacek/stacktable.js/

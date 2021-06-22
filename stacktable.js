@@ -29,7 +29,16 @@
       if ($table.hasClass('stacktable')) {
         return;
       }
-      var table_css = $(this).prop('class');
+      var jQprop = true;
+      if ($.fn.jquery.replace(/\.(\d)/g,".0$1").replace(/\.0(\d{2})/g,".$1") < "1.06.00") {
+        jQprop = false;
+      }
+      var table_css;
+      if (jQprop) {
+        table_css = $(this).prop('class');
+      } else {
+        table_css = $(this).attr('class');
+      }
       var $stacktable = $('<div></div>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
@@ -49,7 +58,11 @@
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
         headMarkup = '';
         bodyMarkup = '';
-        tr_class = $(this).prop('class');
+        if (jQprop) {
+          tr_class = $(this).prop('class');
+        } else {
+          tr_class = $(this).attr('class');
+        }
         // for the first row, "headIndex" cell is the head of the table
         // for the other rows, put the "headIndex" cell as the head for that row
         // then iterate through the key/values
@@ -61,7 +74,13 @@
             } else {
               bodyMarkup += '<td class="st-key"></td>';
             }
-            bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
+            var td_class;
+            if (jQprop) {
+              td_class = $(this).prop('class');
+            } else {
+              td_class = $(this).attr('class');
+            }
+            bodyMarkup += '<td class="st-val '+ td_class +'">'+$(this).html()+'</td>';
             bodyMarkup += '</tr>';
           }
         });
@@ -94,7 +113,12 @@
       headIndex = 0;
 
     return $tables.each(function() {
-      var table_css = $(this).prop('class');
+      var table_css;
+      if (jQprop) {
+        table_css = $(this).prop('class');
+      } else {
+        table_css = $(this).attr('class');
+      }
       var $stacktable = $('<table class="'+ table_css +' stacktable small-only"><tbody></tbody></table>');
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
@@ -113,7 +137,11 @@
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
         headMarkup = '';
         bodyMarkup = '';
-        tr_class = $(this).prop('class');
+        if (jQprop) {
+          tr_class = $(this).prop('class');
+        } else {
+          tr_class = $(this).attr('class');
+        }
 
         // for the first row, "headIndex" cell is the head of the table
         if (rowIndex === 0) {
@@ -135,7 +163,13 @@
                 } else {
                   bodyMarkup += '<td class="st-key"></td>';
                 }
-                bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
+                var td_class
+                if (jQprop) {
+                  td_class = $(this).prop('class');
+                } else {
+                  td_class = $(this).attr('class');
+                }
+                bodyMarkup += '<td class="st-val '+ td_class +'">'+$(this).html()+'</td>';
                 bodyMarkup += '</tr>';
               }
             }

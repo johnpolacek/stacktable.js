@@ -44,7 +44,7 @@
       $table.siblings().filter('.small-only').remove();
 
       // using rowIndex and cellIndex in order to reduce ambiguity
-      $table.find('>tbody>tr').each(function() {
+      $table.find('>tbody>tr').not($topRow).each(function() {
 
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
         headMarkup = '';

@@ -27,6 +27,7 @@
   },
   "homepage": "http://johnpolacek.github.com/stacktable.js/",
   "files": [
-    "stacktable.js"
+    "stacktable.js",
+    "stacktable.css"
   ]
 }

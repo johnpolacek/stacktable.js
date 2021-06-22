@@ -50,33 +50,38 @@
         headMarkup = '';
         bodyMarkup = '';
         tr_class = $(this).prop('class');
-        // for the first row, "headIndex" cell is the head of the table
-        // for the other rows, put the "headIndex" cell as the head for that row
+        var $new_table = $('<table class="stacktable small-only"><tbody></tbody></table>').addClass(table_css);
+
+        // for the first row, "cellIndex" cell is the head of the table
+        // for the other rows, put the "cellIndex" cell as the head for that row
         // then iterate through the key/values
-        $(this).find('>td,>th').each(function(cellIndex) {
-          if ($(this).html() !== ''){
-            bodyMarkup += '<tr class="' + tr_class +'">';
-            if ($topRow.find('>td,>th').eq(cellIndex).html()){
-              bodyMarkup += '<td class="st-key">'+$topRow.find('>td,>th').eq(cellIndex).html()+'</td>';
-            } else {
-              bodyMarkup += '<td class="st-key"></td>';
-            }
-            bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
-            bodyMarkup += '</tr>';
+
+        $(this).find('>td,>th').each(function(cellIndex, cellElement) {
+          if ($(cellElement).html() !== '') {
+            $new_table.find('tbody').append(
+              $('<tr/>').addClass(tr_class).append(
+                $('<td class="st-key"/>').append(
+                  $topRow.find('>td,>th').eq(cellIndex).contents().clone()
+                ),
+                $('<td class="st-val"/>').addClass($(cellElement).prop('class')).append($(cellElement).contents().clone())
+              )
+            )
           }
         });
 
-        markup += '<table class=" '+ table_css +' stacktable small-only"><tbody>' + headMarkup + bodyMarkup + '</tbody></table>';
+        $stacktable.append($new_table);
+
       });
 
-      $table.find('>tfoot>tr>td').each(function(rowIndex,value) {
-        if ($.trim($(value).text()) !== '') {
-          markup += '<table class="'+ table_css + ' stacktable small-only"><tbody><tr><td>' + $(value).html() + '</td></tr></tbody></table>';
+      $table.find('>tfoot>tr>td').each(function(cellIndex,cellElement) {
+        if ($.trim($(cellElement).text()) !== '') {
+          $stacktable.append(
+            $('<table class="stacktable small-only"><tbody><tr><td></td></tr></tbody></table>')
+              .addClass(table_css).find('td').append( $(cellElement).contents().clone() )).end();
         }
       });
 
       $stacktable.prepend($caption);
-      $stacktable.append($(markup));
       $table.before($stacktable);
     });
   };
@@ -95,7 +100,7 @@
 
     return $tables.each(function() {
       var table_css = $(this).prop('class');
-      var $stacktable = $('<table class="'+ table_css +' stacktable small-only"><tbody></tbody></table>');
+      var $stacktable = $('<table class="stacktable small-only"><tbody></tbody></table>').addClass(table_css);
       if (typeof settings.myClass !== 'undefined') $stacktable.addClass(settings.myClass);
       var markup = '';
       var $table, $caption, $topRow, headMarkup, bodyMarkup, tr_class, displayHeader;
@@ -108,7 +113,7 @@
       displayHeader = $table.data('display-header') === undefined ? settings.displayHeader : $table.data('display-header');
 
       // using rowIndex and cellIndex in order to reduce ambiguity
-      $table.find('>tbody>tr, >thead>tr').each(function(rowIndex) {
+      $table.find('>tbody>tr, >thead>tr').each(function(rowIndex, rowElement) {
 
         // declaring headMarkup and bodyMarkup, to be used for separately head and body of single records
         headMarkup = '';
@@ -119,34 +124,37 @@
         if (rowIndex === 0) {
           // the main heading goes into the markup variable
           if (displayHeader) {
-            markup += '<tr class=" '+tr_class +' "><th class="st-head-row st-head-row-main" colspan="2">'+$(this).find('>th,>td').eq(headIndex).html()+'</th></tr>';
+            $stacktable.find('tbody').append(
+              $('<tr/>').append(
+                $('<th class="st-head-row st-head-row-main" colspan="2"></th>')
+                .append($(rowElement).find('>th,>td').eq(headIndex).contents().clone())
+              )
+            );
           }
         } else {
           // for the other rows, put the "headIndex" cell as the head for that row
           // then iterate through the key/values
-          $(this).find('>td,>th').each(function(cellIndex) {
+          $(rowElement).find('>td,>th').each(function(cellIndex, cellElement) {
             if (cellIndex === headIndex) {
-              headMarkup = '<tr class="'+ tr_class+'"><th class="st-head-row" colspan="2">'+$(this).html()+'</th></tr>';
+              $stacktable.find('tbody').append(
+                $('<tr><th class="st-head-row" colspan="2"></th></tr>').addClass(tr_class)
+                .find('th').append($(cellElement).contents().clone()).end()
+              );
             } else {
-              if ($(this).html() !== ''){
-                bodyMarkup += '<tr class="' + tr_class +'">';
-                if ($topRow.find('>td,>th').eq(cellIndex).html()){
-                  bodyMarkup += '<td class="st-key">'+$topRow.find('>td,>th').eq(cellIndex).html()+'</td>';
-                } else {
-                  bodyMarkup += '<td class="st-key"></td>';
-                }
-                bodyMarkup += '<td class="st-val '+$(this).prop('class')  +'">'+$(this).html()+'</td>';
-                bodyMarkup += '</tr>';
+              if ($(cellElement).html() !== '') {
+                $stacktable.find('tbody').append(
+                  $('<tr></tr>').addClass(tr_class)
+                    .append( $('<td class="st-key"></td>').append($topRow.find('>td,>th').eq(cellIndex).contents().clone()) )
+                    .append( $('<td class="st-val"></td>').addClass( $(cellElement).prop('class') ).append($(cellElement).contents().clone()) )
+                );
               }
             }
           });
 
-          markup += headMarkup + bodyMarkup;
         }
       });
 
       $stacktable.prepend($caption);
-      $stacktable.append($(markup));
       $table.before($stacktable);
     });
   };
